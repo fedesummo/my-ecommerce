@@ -2,16 +2,16 @@ import { Products } from "../../../daos/index"
 
 const handler = async (req, res) => {
 
-    console.log(req.body)
-
     if (req.method === "GET") {
         const data = await Products.getAllDocuments()
-        res.send(data)
+        res.status(data.status).json(data.data)
     }
 
     if (req.method === "POST") {
-        console.log(req.body)
-    }
+        const doc = req.body
+        const data = await Products.saveDocument(doc)
+        res.send(data)
+    }  
 
   };
   
